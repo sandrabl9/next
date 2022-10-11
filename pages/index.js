@@ -4,8 +4,14 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import Button from "../components/Button";
 import SvgComponent from "../components/Icons/Login";
+import { loginWithGitHub } from "../firebase/client";
 
 export default function Home() {
+  const handleClick = () => {
+    loginWithGitHub().then((user) => {
+      console.log(user);
+    });
+  };
   return (
     <div className={styles.container}>
       <Head>
@@ -19,7 +25,7 @@ export default function Home() {
           <a href="https://nextjs.org">Devter</a>
         </h1>
         <p className={styles.text}>Bienvenido a la comunidad Dev</p>
-        <Button>
+        <Button onClick={handleClick}>
           <SvgComponent fill="#fff" />
           Login
         </Button>
