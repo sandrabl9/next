@@ -2,6 +2,8 @@ import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
+import Button from "../components/Button";
+import SvgComponent from "../components/Icons/Login";
 
 export default function Home() {
   return (
@@ -16,25 +18,17 @@ export default function Home() {
         <h1 className={styles.title}>
           <a href="https://nextjs.org">Devter</a>
         </h1>
-        <nav>
+        <p className={styles.text}>Bienvenido a la comunidad Dev</p>
+        <Button>
+          <SvgComponent fill="#fff" />
+          Login
+        </Button>
+        {/* <nav>
           <Link href="/timeline">
             <a>Timeline</a>
           </Link>
-        </nav>
+        </nav> */}
       </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{" "}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
     </div>
   );
 }
