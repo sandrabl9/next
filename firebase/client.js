@@ -11,9 +11,27 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
+const mapUserFromFirebaseAuthToUser = (data) => {
+  const { user } = data;
+  const { displayName, photoURL, email } = user;
+  console.log(data);
+  return {
+    avatar: photoURL,
+    username: displayName,
+    email,
+  };
+};
+
+export const onAuthStateChanged = (onChange) => {
+  return getAuth().onAuthStateChanged((user) => {
+    const normalizedUser = mapUserFromFirebaseAuthToUser(user);
+    onChange(normalizedUser);
+  });
+};
+
 export const loginWithGitHub = () => {
   const auth = getAuth();
   const provider = new GithubAuthProvider();
 
-  return signInWithPopup(auth, provider);
+  return signInWithPopup(auth, provider).then(mapUserFromFirebaseAuthToUser);
 };
